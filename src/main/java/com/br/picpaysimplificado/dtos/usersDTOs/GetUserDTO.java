@@ -1,4 +1,4 @@
-package com.br.picpaysimplificado.dtos.usersDtos;
+package com.br.picpaysimplificado.dtos.usersDTOs;
 
 import com.br.picpaysimplificado.domain.users.User;
 import com.br.picpaysimplificado.domain.users.UserType;

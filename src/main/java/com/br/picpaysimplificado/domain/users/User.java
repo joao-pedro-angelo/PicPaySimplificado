@@ -1,6 +1,6 @@
 package com.br.picpaysimplificado.domain.users;
 
-import com.br.picpaysimplificado.dtos.usersDtos.CreateUserDTO;
+import com.br.picpaysimplificado.dtos.usersDTOs.CreateUserDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
