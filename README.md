@@ -20,10 +20,9 @@
 
 ---
 
-## O que será valorizado:
+## Boas práticas:
 
 - Documentação.
-- Desenho de arquitetura (para a vaga sênior).
 - Código limpo e organizado.
 - Conhecimento de padrões.
 - Consistência e capacidade de argumentação das escolhas.
