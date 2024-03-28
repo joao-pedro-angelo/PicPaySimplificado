@@ -3,7 +3,9 @@ package com.br.picpaysimplificado.services;
 import com.br.picpaysimplificado.domain.transactions.Transaction;
 import com.br.picpaysimplificado.domain.users.User;
 import com.br.picpaysimplificado.dtos.transactionsDTOs.CreateTransactionDTO;
+import com.br.picpaysimplificado.dtos.transactionsDTOs.GetTransactionDTO;
 import com.br.picpaysimplificado.infra.exceptions.ValidateException;
+import com.br.picpaysimplificado.infra.notification.Notification;
 import com.br.picpaysimplificado.repositories.TransactionRepositorie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Objects;
@@ -25,13 +26,15 @@ public class TransactionService {
     private TransactionRepositorie repositorie;
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private Notification notification;
 
-    public void createTransaction(CreateTransactionDTO transactionDTO){
+    public GetTransactionDTO createTransaction(CreateTransactionDTO transactionDTO){
         User sender = this.userService.findUserByCPF(transactionDTO.cpfSender());
         User receiver = this.userService.findUserByCPF(transactionDTO.cpfReceiver());
         this.userService.validateTransaction(sender, transactionDTO.value());
 
-        if (this.authorizeTransaction(sender, transactionDTO.value())){
+        if (this.authorizeTransaction()){
             Transaction transaction = new Transaction();
             transaction.setAmount(transactionDTO.value());
             transaction.setSender(sender);
@@ -44,10 +47,15 @@ public class TransactionService {
             this.repositorie.save(transaction);
             this.userService.updateUser(sender);
             this.userService.updateUser(receiver);
+
+            this.notification.sendNotification(sender, "Transação feita.");
+            this.notification.sendNotification(receiver, "Transação recebida.");
+
+            return new GetTransactionDTO(transaction);
         } else throw new ValidateException("Transação não autorizada.");
     }
 
-    public boolean authorizeTransaction(User sender, BigDecimal value){
+    public boolean authorizeTransaction(){
         ResponseEntity<Map> authorize = this.restTemplate.getForEntity("https://run.mocky.io/v3/5794d450-d2e2-4412-8131-73d0293ac1cc", Map.class);
 
         if (authorize.getStatusCode() == HttpStatus.OK){
