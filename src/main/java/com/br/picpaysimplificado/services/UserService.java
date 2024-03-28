@@ -7,6 +7,7 @@ import com.br.picpaysimplificado.dtos.usersDTOs.GetUserDTO;
 import com.br.picpaysimplificado.infra.exceptions.NotFoundException;
 import com.br.picpaysimplificado.infra.exceptions.ValidateException;
 import com.br.picpaysimplificado.repositories.UserRepositorie;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
 
+    @Autowired
     private UserRepositorie repositorie;
 
     public void validateTransaction(User sender, BigDecimal amount){
