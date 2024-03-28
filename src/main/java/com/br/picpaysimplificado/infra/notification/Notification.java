@@ -23,6 +23,6 @@ public class Notification {
 
         if ( !(response.getStatusCode() == HttpStatus.OK) ){
             throw new ValidateException("Erro ao enviar notificação!");
-        }
+        } System.out.println("Notificações OK");
     }
 }
