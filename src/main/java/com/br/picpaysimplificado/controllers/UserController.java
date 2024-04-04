@@ -20,19 +20,22 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<GetUserDTO> createUser(@RequestBody @Valid CreateUserDTO createUserDTO){
-        return ResponseEntity.status(HttpStatus.CREATED)
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
                 .body(this.service.createUser(createUserDTO));
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<GetUserDTO>> getAllUsers(){
-        return ResponseEntity.status(HttpStatus.OK)
+        return ResponseEntity
+                .status(HttpStatus.OK)
                 .body(this.service.findAllUsers());
     }
 
     @GetMapping("{cpf}")
     public ResponseEntity<GetUserDTO> getUser(@PathVariable String cpf){
-        return ResponseEntity.status(HttpStatus.OK)
+        return ResponseEntity
+                .status(HttpStatus.OK)
                 .body(new GetUserDTO(this.service.findUserByCPF(cpf)));
     }
 }

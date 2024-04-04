@@ -1,6 +1,5 @@
 package com.br.picpaysimplificado.controllers;
 
-import com.br.picpaysimplificado.domain.transactions.Transaction;
 import com.br.picpaysimplificado.dtos.transactionsDTOs.CreateTransactionDTO;
 import com.br.picpaysimplificado.dtos.transactionsDTOs.GetTransactionDTO;
 import com.br.picpaysimplificado.services.TransactionService;
@@ -23,7 +22,8 @@ public class TransactionController {
     @PostMapping
     public ResponseEntity<GetTransactionDTO> createTransaction(
             @RequestBody @Valid CreateTransactionDTO createTransactionDTO){
-        return ResponseEntity.status(HttpStatus.CREATED)
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
                 .body(this.service.createTransaction(createTransactionDTO));
     }
 }
