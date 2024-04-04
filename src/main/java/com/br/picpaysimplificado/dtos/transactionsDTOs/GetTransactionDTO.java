@@ -12,7 +12,8 @@ public record GetTransactionDTO(
         User sender,
         User receiver,
         LocalDateTime timestamp
-) {
+)
+{
     public GetTransactionDTO(Transaction transaction){
         this(transaction.getId(),
                 transaction.getAmount(),

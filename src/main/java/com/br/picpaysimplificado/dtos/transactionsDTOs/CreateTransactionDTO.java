@@ -12,5 +12,5 @@ public record CreateTransactionDTO(
         String cpfSender,
         @NotBlank
         String cpfReceiver
-) {
-}
+)
+{}

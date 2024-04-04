@@ -12,7 +12,8 @@ public record GetUserDTO(
         String email,
         BigDecimal balance,
         UserType userType
-) {
+)
+{
     public GetUserDTO(User user){
         this(user.getFirstName(),
                 user.getLastName(),
