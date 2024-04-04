@@ -6,7 +6,7 @@ import com.br.picpaysimplificado.dtos.transactionsDTOs.CreateTransactionDTO;
 import com.br.picpaysimplificado.dtos.transactionsDTOs.GetTransactionDTO;
 import com.br.picpaysimplificado.infra.exceptions.ValidateException;
 import com.br.picpaysimplificado.infra.notification.Notification;
-import com.br.picpaysimplificado.repositories.TransactionRepositorie;
+import com.br.picpaysimplificado.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class TransactionService {
     @Autowired
     private UserService userService;
     @Autowired
-    private TransactionRepositorie repositorie;
+    private TransactionRepository repositorie;
     @Autowired
     private RestTemplate restTemplate;
     @Autowired

@@ -6,7 +6,7 @@ import com.br.picpaysimplificado.dtos.usersDTOs.CreateUserDTO;
 import com.br.picpaysimplificado.dtos.usersDTOs.GetUserDTO;
 import com.br.picpaysimplificado.infra.exceptions.NotFoundException;
 import com.br.picpaysimplificado.infra.exceptions.ValidateException;
-import com.br.picpaysimplificado.repositories.UserRepositorie;
+import com.br.picpaysimplificado.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class UserService {
 
     @Autowired
-    private UserRepositorie repositorie;
+    private UserRepository repositorie;
 
     public void validateTransaction(User sender, BigDecimal amount){
         if (sender.getUserType() == UserType.MERCHANT){
