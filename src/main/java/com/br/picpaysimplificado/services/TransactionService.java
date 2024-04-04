@@ -35,27 +35,34 @@ public class TransactionService {
         this.userService.validateTransaction(sender, transactionDTO.value());
 
         if (this.authorizeTransaction()){
-            Transaction transaction = new Transaction();
-            transaction.setAmount(transactionDTO.value());
-            transaction.setSender(sender);
-            transaction.setReceiver(receiver);
-            transaction.setTimestamp(LocalDateTime.now());
-
+            Transaction transaction = this.setTransaction(transactionDTO, sender, receiver);
             sender.setBalance(sender.getBalance().subtract(transactionDTO.value()));
             receiver.setBalance(receiver.getBalance().add(transactionDTO.value()));
-
             this.repositorie.save(transaction);
             this.userService.updateUser(sender);
             this.userService.updateUser(receiver);
-
-            this.notification.sendNotification(sender, "Transação feita.");
-            this.notification.sendNotification(receiver, "Transação recebida.");
+            this.sendNotification(sender, "Transação feita.");
+            this.sendNotification(receiver, "Transação recebida.");
 
             return new GetTransactionDTO(transaction);
         } else throw new ValidateException("Transação não autorizada.");
     }
 
-    public boolean authorizeTransaction(){
+    private void sendNotification(User user, String msg){
+        this.notification.sendNotification(user, msg);
+    }
+
+    private Transaction setTransaction(CreateTransactionDTO transactionDTO,
+                                        User sender, User receiver){
+        Transaction transaction = new Transaction();
+        transaction.setAmount(transactionDTO.value());
+        transaction.setSender(sender);
+        transaction.setReceiver(receiver);
+        transaction.setTimestamp(LocalDateTime.now());
+        return transaction;
+    }
+
+    private boolean authorizeTransaction(){
         ResponseEntity<Map> authorize = this.restTemplate.getForEntity("https://run.mocky.io/v3/5794d450-d2e2-4412-8131-73d0293ac1cc", Map.class);
 
         if (authorize.getStatusCode() == HttpStatus.OK){
