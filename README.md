@@ -38,7 +38,6 @@
 ## Tecnologias Utilizadas (por João Pedro):
 
 - **Java 21:** Linguagem de programação amplamente utilizada.
-- **IntelliJ:** IDE para facilitar o desenvolvimento.
 - **Maven:** Gerenciador de dependências para projetos Java.
 - **Spring Web:** Facilita o desenvolvimento de APIs Restful.
 - **Spring Data JPA:** Facilita a persistência dos dados.
