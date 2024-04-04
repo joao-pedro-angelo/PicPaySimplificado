@@ -10,11 +10,14 @@ public class ErrorHandler {
 
     @ExceptionHandler(ValidateException.class)
     private ResponseEntity<String> validateException(ValidateException e){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(e.getMessage());
     }
 
     @ExceptionHandler(NotFoundException.class)
     private ResponseEntity<String> notFoundException(NotFoundException e){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(e.getMessage());
     }
+
 }
