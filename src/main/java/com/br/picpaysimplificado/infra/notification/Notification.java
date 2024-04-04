@@ -19,10 +19,13 @@ public class Notification {
         String email = user.getEmail();
         CreateNotification notificationRequest = new CreateNotification(email, msg);
         ResponseEntity<String> response = this.restTemplate
-                .postForEntity("https://run.mocky.io/v3/54dc2cf1-3add-45b5-b5a9-6bf7e7f1f4a6", notificationRequest ,String.class);
+                .postForEntity("https://run.mocky.io/v3/54dc2cf1-3add-45b5-b5a9-6bf7e7f1f4a6",
+                        notificationRequest,
+                        String.class);
 
-        if ( !(response.getStatusCode() == HttpStatus.OK) ){
+        if (!(response.getStatusCode() == HttpStatus.OK)){
             throw new ValidateException("Erro ao enviar notificação!");
-        } System.out.println("Notificações OK");
+        }
     }
+
 }
