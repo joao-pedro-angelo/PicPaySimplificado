@@ -63,10 +63,14 @@ public class TransactionService {
     }
 
     private boolean authorizeTransaction(){
-        ResponseEntity<Map> authorize = this.restTemplate.getForEntity("https://run.mocky.io/v3/5794d450-d2e2-4412-8131-73d0293ac1cc", Map.class);
+        ResponseEntity<Map> authorize =
+                this.restTemplate.getForEntity
+                        ("https://run.mocky.io/v3/5794d450-d2e2-4412-8131-73d0293ac1cc",
+                                Map.class);
 
         if (authorize.getStatusCode() == HttpStatus.OK){
-            String message = (String) Objects.requireNonNull(authorize.getBody()).get("message");
+            String message = (String) Objects.requireNonNull(authorize.getBody())
+                    .get("message");
             return "Autorizado".equalsIgnoreCase(message);
         } else return false;
     }
