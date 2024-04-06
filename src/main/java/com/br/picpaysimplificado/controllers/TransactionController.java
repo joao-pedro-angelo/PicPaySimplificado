@@ -19,7 +19,6 @@ public class TransactionController {
     @Autowired
     private TransactionService service;
 
-    //@ApiOperation(value = "EndPoint criar transação")
     @PostMapping
     public ResponseEntity<GetTransactionDTO> createTransaction(
             @RequestBody @Valid CreateTransactionDTO createTransactionDTO){
