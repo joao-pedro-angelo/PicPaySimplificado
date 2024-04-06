@@ -7,6 +7,7 @@ import com.br.picpaysimplificado.dtos.usersDTOs.GetUserDTO;
 import com.br.picpaysimplificado.infra.exceptions.NotFoundException;
 import com.br.picpaysimplificado.infra.exceptions.ValidateException;
 import com.br.picpaysimplificado.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,10 +33,12 @@ public class UserService {
         return this.repository.findUserByCPF(cpf).orElseThrow(NotFoundException::new);
     }
 
+    @Transactional
     public void updateUser(User user){
         this.repository.save(user);
     }
 
+    @Transactional
     public GetUserDTO createUser(CreateUserDTO userDTO){
         User user = new User(userDTO);
         this.repository.save(user);

@@ -7,6 +7,7 @@ import com.br.picpaysimplificado.dtos.transactionsDTOs.GetTransactionDTO;
 import com.br.picpaysimplificado.infra.exceptions.ValidateException;
 import com.br.picpaysimplificado.infra.notification.Notification;
 import com.br.picpaysimplificado.repositories.TransactionRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,7 @@ public class TransactionService {
     @Autowired
     private Notification notification;
 
+    @Transactional
     public GetTransactionDTO createTransaction(CreateTransactionDTO transactionDTO){
         User sender = this.userService.findUserByCPF(transactionDTO.cpfSender());
         User receiver = this.userService.findUserByCPF(transactionDTO.cpfReceiver());
