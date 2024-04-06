@@ -19,7 +19,8 @@ public class UserController {
     private UserService service;
 
     @PostMapping
-    public ResponseEntity<GetUserDTO> createUser(@RequestBody @Valid CreateUserDTO createUserDTO){
+    public ResponseEntity<GetUserDTO> createUser(
+            @RequestBody @Valid CreateUserDTO createUserDTO){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(this.service.createUser(createUserDTO));
@@ -32,7 +33,7 @@ public class UserController {
                 .body(this.service.findAllUsers());
     }
 
-    @GetMapping("{cpf}")
+    @GetMapping("/{cpf}")
     public ResponseEntity<GetUserDTO> getUser(@PathVariable String cpf){
         return ResponseEntity
                 .status(HttpStatus.OK)

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class UserService {
 
     @Autowired
-    private UserRepository repositorie;
+    private UserRepository repository;
 
     public void validateTransaction(User sender, BigDecimal amount){
         if (sender.getUserType() == UserType.MERCHANT){
@@ -29,21 +29,21 @@ public class UserService {
     }
 
     public User findUserByCPF(String cpf){
-        return this.repositorie.findUserByCPF(cpf).orElseThrow(NotFoundException::new);
+        return this.repository.findUserByCPF(cpf).orElseThrow(NotFoundException::new);
     }
 
     public void updateUser(User user){
-        this.repositorie.save(user);
+        this.repository.save(user);
     }
 
     public GetUserDTO createUser(CreateUserDTO userDTO){
         User user = new User(userDTO);
-        this.repositorie.save(user);
+        this.repository.save(user);
         return new GetUserDTO(user);
     }
 
     public List<GetUserDTO> findAllUsers(){
-        return this.repositorie.findAll()
+        return this.repository.findAll()
                 .stream()
                 .map(GetUserDTO::new)
                 .collect(Collectors.toList());

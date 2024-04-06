@@ -23,7 +23,7 @@ public class TransactionService {
     @Autowired
     private UserService userService;
     @Autowired
-    private TransactionRepository repositorie;
+    private TransactionRepository repository;
     @Autowired
     private RestTemplate restTemplate;
     @Autowired
@@ -38,7 +38,7 @@ public class TransactionService {
             Transaction transaction = this.setTransaction(transactionDTO, sender, receiver);
             sender.setBalance(sender.getBalance().subtract(transactionDTO.value()));
             receiver.setBalance(receiver.getBalance().add(transactionDTO.value()));
-            this.repositorie.save(transaction);
+            this.repository.save(transaction);
             this.userService.updateUser(sender);
             this.userService.updateUser(receiver);
             this.sendNotification(sender, "Transação feita.");
