@@ -3,7 +3,6 @@ package com.br.picpaysimplificado.controllers;
 import com.br.picpaysimplificado.dtos.transactionsDTOs.CreateTransactionDTO;
 import com.br.picpaysimplificado.dtos.transactionsDTOs.GetTransactionDTO;
 import com.br.picpaysimplificado.services.TransactionService;
-import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +19,7 @@ public class TransactionController {
     @Autowired
     private TransactionService service;
 
-    @ApiOperation(value = "EndPoint criar transação")
+    //@ApiOperation(value = "EndPoint criar transação")
     @PostMapping
     public ResponseEntity<GetTransactionDTO> createTransaction(
             @RequestBody @Valid CreateTransactionDTO createTransactionDTO){

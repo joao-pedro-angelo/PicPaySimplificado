@@ -16,13 +16,14 @@ import java.math.BigDecimal;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String firstName;
     private String lastName;
 
     @Column(unique = true)
-    private String cpf;
+    private String CPF;
 
     @Column(unique = true)
     private String email;
@@ -35,7 +36,7 @@ public class User {
     public User(CreateUserDTO createUserDTO){
         this.firstName = createUserDTO.firstName();
         this.lastName = createUserDTO.lastName();
-        this.cpf = createUserDTO.cpf();
+        this.CPF = createUserDTO.cpf();
         this.password = createUserDTO.password();
         this.balance = BigDecimal.ZERO;
         this.userType = createUserDTO.userType();

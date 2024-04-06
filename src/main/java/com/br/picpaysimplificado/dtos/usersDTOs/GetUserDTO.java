@@ -17,7 +17,7 @@ public record GetUserDTO(
     public GetUserDTO(User user){
         this(user.getFirstName(),
                 user.getLastName(),
-                user.getCpf(),
+                user.getCPF(),
                 user.getEmail(),
                 user.getBalance(),
                 user.getUserType()
