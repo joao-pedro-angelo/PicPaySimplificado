@@ -29,8 +29,8 @@ public class UserService {
         }
     }
 
-    public User findUserByCPF(String cpf){
-        return this.repository.findUserByCPF(cpf).orElseThrow(NotFoundException::new);
+    public User findUserByCPF(String CPF){
+        return this.repository.findUserByCPF(CPF).orElseThrow(NotFoundException::new);
     }
 
     @Transactional

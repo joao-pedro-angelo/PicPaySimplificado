@@ -4,6 +4,7 @@ import com.br.picpaysimplificado.domain.users.User;
 import com.br.picpaysimplificado.domain.users.UserType;
 import com.br.picpaysimplificado.dtos.transactionsDTOs.CreateTransactionDTO;
 import com.br.picpaysimplificado.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -26,6 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureJsonTesters
+@Transactional
 public class TransactionControllerTest {
 
     @Autowired
@@ -50,12 +52,13 @@ public class TransactionControllerTest {
         this.userRepository.save(sender);
 
         User receiver = new User();
-        sender.setFirstName("Victor");
-        sender.setLastName("Angelo");
-        sender.setEmail("vangelo@gmail.com");
-        sender.setCPF("112057904-50");
-        sender.setPassword("125");
-        sender.setUserType(UserType.MERCHANT);
+        receiver.setFirstName("Victor");
+        receiver.setLastName("Angelo");
+        receiver.setEmail("vangelo@gmail.com");
+        receiver.setCPF("112057904-50");
+        receiver.setPassword("125");
+        receiver.setUserType(UserType.MERCHANT);
+        receiver.setBalance(BigDecimal.ZERO);
         this.userRepository.save(receiver);
     }
 
@@ -81,7 +84,7 @@ public class TransactionControllerTest {
                 "112097904-49",
                 "112057904-50");
 
-        var response = this.mockMvc.perform(post("transactions")
+        var response = this.mockMvc.perform(post("/transactions")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.createTransactionDTOJacksonTester
                         .write(transactionDTO)
@@ -99,7 +102,7 @@ public class TransactionControllerTest {
                 "112057904-50",
                 "112097904-49");
 
-        var response = this.mockMvc.perform(post("transactions")
+        var response = this.mockMvc.perform(post("/transactions")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(this.createTransactionDTOJacksonTester
                                 .write(transactionDTO)
@@ -117,7 +120,7 @@ public class TransactionControllerTest {
                 "112097904-49",
                 "112057904-50");
 
-        var response = this.mockMvc.perform(post("transactions")
+        var response = this.mockMvc.perform(post("/transactions")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(this.createTransactionDTOJacksonTester
                                 .write(transactionDTO)
